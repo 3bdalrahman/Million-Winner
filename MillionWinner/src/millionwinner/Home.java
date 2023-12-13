@@ -38,6 +38,7 @@ public class Home extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(25, 4, 130));
+        setMaximumSize(new java.awt.Dimension(800, 500));
 
         jPanel1.setBackground(new java.awt.Color(194, 217, 255));
         jPanel1.setPreferredSize(new java.awt.Dimension(800, 500));
@@ -47,7 +48,7 @@ public class Home extends javax.swing.JFrame {
         LogoutBtn.setForeground(new java.awt.Color(0, 0, 0));
         LogoutBtn.setText("LogOut");
         LogoutBtn.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        LogoutBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.WAIT_CURSOR));
+        LogoutBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         LogoutBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 LogoutBtnActionPerformed(evt);
@@ -75,18 +76,21 @@ public class Home extends javax.swing.JFrame {
         showScoreboardBtn.setForeground(new java.awt.Color(0, 0, 0));
         showScoreboardBtn.setText("Scoreboard");
         showScoreboardBtn.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        showScoreboardBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         StartBtn.setBackground(new java.awt.Color(119, 82, 254));
         StartBtn.setFont(new java.awt.Font("Showcard Gothic", 0, 12)); // NOI18N
         StartBtn.setForeground(new java.awt.Color(0, 0, 0));
         StartBtn.setText("Start");
         StartBtn.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        StartBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         ExitBtn.setBackground(new java.awt.Color(119, 82, 254));
         ExitBtn.setFont(new java.awt.Font("Showcard Gothic", 0, 12)); // NOI18N
         ExitBtn.setForeground(new java.awt.Color(0, 0, 0));
         ExitBtn.setText("Exit");
         ExitBtn.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        ExitBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         ExitBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ExitBtnActionPerformed(evt);
@@ -114,9 +118,9 @@ public class Home extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(usernameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(showScoreboardBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(StartBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(ExitBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(ExitBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(showScoreboardBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(345, 345, 345))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -131,11 +135,11 @@ public class Home extends javax.swing.JFrame {
                 .addComponent(WelcomeText, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(usernameLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(showScoreboardBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(StartBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(showScoreboardBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
                 .addComponent(ExitBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(114, Short.MAX_VALUE))
         );
