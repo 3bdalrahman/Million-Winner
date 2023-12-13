@@ -3,7 +3,7 @@ use MillionWinner;
 create table user(
 id bigint primary key,
 username varchar(255),
-passwrord longtext,
+password longtext,
 score int,
 levle int
 );
