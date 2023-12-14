@@ -1,8 +1,16 @@
 package millionwinner;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import javax.swing.JOptionPane;
+import javax.swing.JFrame;
+import javax.swing.table.DefaultTableModel;
+
 public class scoreboard extends javax.swing.JFrame {
 
-
+    Connection con = null;
     public scoreboard() {
         initComponents();
     }
@@ -23,8 +31,12 @@ public class scoreboard extends javax.swing.JFrame {
         backBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(800, 500));
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(194, 217, 255));
         jPanel1.setPreferredSize(new java.awt.Dimension(800, 500));
@@ -37,33 +49,17 @@ public class scoreboard extends javax.swing.JFrame {
         jScrollPane1.setForeground(new java.awt.Color(0, 0, 0));
 
         HighScoreTable.setBackground(new java.awt.Color(194, 217, 255));
+        HighScoreTable.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(194, 217, 255)));
         HighScoreTable.setFont(new java.awt.Font("Showcard Gothic", 0, 14)); // NOI18N
         HighScoreTable.setForeground(new java.awt.Color(0, 0, 0));
         HighScoreTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"1", ".......", "000   "},
-                {"2 ", ".......  ", "000  "},
-                {"3", ".......  ", "000   "},
-                {"4", ".......  ", "000   "},
-                {"5 ", ".......  ", "000   "},
-                {"6", ".......  ", "000  "},
-                {"7", ".......  ", "000  "},
-                {"8", ".......", "000  "},
-                {"9", ".......  ", "000  "},
-                {"10", ".......  ", "000   "}
+
             },
             new String [] {
-                "", "username", "score"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false
-            };
 
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
             }
-        });
+        ));
         HighScoreTable.setGridColor(new java.awt.Color(194, 217, 255));
         HighScoreTable.setPreferredSize(new java.awt.Dimension(100, 300));
         HighScoreTable.setRowHeight(30);
@@ -71,11 +67,6 @@ public class scoreboard extends javax.swing.JFrame {
         HighScoreTable.setSelectionForeground(new java.awt.Color(0, 0, 0));
         HighScoreTable.setShowGrid(false);
         jScrollPane1.setViewportView(HighScoreTable);
-        if (HighScoreTable.getColumnModel().getColumnCount() > 0) {
-            HighScoreTable.getColumnModel().getColumn(0).setMinWidth(20);
-            HighScoreTable.getColumnModel().getColumn(0).setPreferredWidth(20);
-            HighScoreTable.getColumnModel().getColumn(0).setMaxWidth(20);
-        }
 
         backBtn.setBackground(new java.awt.Color(119, 82, 254));
         backBtn.setFont(new java.awt.Font("Showcard Gothic", 0, 12)); // NOI18N
@@ -101,11 +92,11 @@ public class scoreboard extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(346, 346, 346))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(backBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(353, 353, 353))))
+                        .addGap(353, 353, 353))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(347, 347, 347))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -113,10 +104,10 @@ public class scoreboard extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 331, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(36, 36, 36)
                 .addComponent(backBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(89, Short.MAX_VALUE))
+                .addContainerGap(73, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -143,32 +134,56 @@ public class scoreboard extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_backBtnActionPerformed
 
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        String selectQuery;
+        try{
+ Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+            con = DriverManager.getConnection("jdbc:mysql://localhost/MillionWinner?user=root&password=Abdo1234");
+            Statement st = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            selectQuery = "SELECT username, score FROM user ORDER BY score DESC LIMIT 10";
+            ResultSet res = st.executeQuery(selectQuery);
+
+            int col = res.getMetaData().getColumnCount();
+
+            // Count the number of rows in the ResultSet
+            int row = 0;
+            while (res.next()) {
+                row++;
+            }
+
+            // Initialize array after counting rows
+            String rowData[][] = new String[row][col];
+
+            // Move back to the beginning of the ResultSet
+            res.beforeFirst();
+
+            int r = 0;
+            while (res.next()) {
+                for (int i = 0; i < col; i++) {
+                    // Assuming your score is in the second column
+                    if (i == 1) {
+                        // Convert the int score to String
+                        rowData[r][i] = String.valueOf(res.getInt(i + 1));
+                    } else {
+                        rowData[r][i] = res.getString(i + 1);
+                    }
+                }
+                r++;
+            }
+
+            String[] columnName = {"Username", "Score"};
+            DefaultTableModel model = (DefaultTableModel) HighScoreTable.getModel();
+            model.setDataVector(rowData, columnName);
+
+        }catch(Exception e){
+            System.out.println("Error!"+e.getMessage());
+        }
+    }//GEN-LAST:event_formWindowActivated
+
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(scoreboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(scoreboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(scoreboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(scoreboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {

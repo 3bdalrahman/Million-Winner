@@ -15,10 +15,6 @@ public class Home extends javax.swing.JFrame {
      */
     public Home() {
         initComponents();
-        User currentUser = UserSession.getInsance().getCurrentUser();
-        usernameLabel.setText(currentUser.getUsername());
-        String ScoreText = String.valueOf(currentUser.getScore());
-        ScoreValue.setText(ScoreText);
     }
 
     /**
@@ -44,6 +40,11 @@ public class Home extends javax.swing.JFrame {
         setBackground(new java.awt.Color(25, 4, 130));
         setMaximumSize(new java.awt.Dimension(800, 500));
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(194, 217, 255));
         jPanel1.setPreferredSize(new java.awt.Dimension(800, 500));
@@ -187,6 +188,13 @@ public class Home extends javax.swing.JFrame {
         scoreboardFrame.setLocationRelativeTo(null);
         this.dispose();
     }//GEN-LAST:event_showScoreboardBtnActionPerformed
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        User currentUser = UserSession.getInsance().getCurrentUser();
+        usernameLabel.setText(currentUser.getUsername());
+        String ScoreText = String.valueOf(currentUser.getScore());
+        ScoreValue.setText(ScoreText);
+    }//GEN-LAST:event_formWindowActivated
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

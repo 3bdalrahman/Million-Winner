@@ -4,7 +4,7 @@
  */
 package millionwinner;
 
-import java.util.Scanner;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -216,7 +216,7 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void LoginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginBtnActionPerformed
-        Scanner scan = new Scanner(System.in);
+
         String username,password,selectQuery,passDb = null;
         int score=0,level=0;
         int notFound = 0;
