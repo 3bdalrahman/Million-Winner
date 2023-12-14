@@ -126,6 +126,7 @@ public class Login extends javax.swing.JFrame {
         LoginBtn.setText("LOGIN");
         LoginBtn.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, null, java.awt.Color.lightGray, null, null));
         LoginBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        LoginBtn.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         LoginBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 LoginBtnActionPerformed(evt);

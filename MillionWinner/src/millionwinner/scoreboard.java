@@ -33,26 +33,39 @@ public class scoreboard extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("High Scores");
 
+        jScrollPane1.setBackground(new java.awt.Color(194, 217, 255));
+        jScrollPane1.setForeground(new java.awt.Color(0, 0, 0));
+
         HighScoreTable.setBackground(new java.awt.Color(194, 217, 255));
         HighScoreTable.setFont(new java.awt.Font("Showcard Gothic", 0, 14)); // NOI18N
         HighScoreTable.setForeground(new java.awt.Color(0, 0, 0));
         HighScoreTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"1", ".......", "00"},
-                {"2", ".......", "000"},
-                {"3", ".......", "000"},
-                {"4", ".......", "000"},
-                {"5", ".......", "000"},
-                {"6", ".......", "000"},
-                {"7", ".......", "000"},
-                {"8", ".......", "000"},
-                {"9", ".......", "000"},
-                {"10", ".......", "000"}
+                {"1", ".......", "000   "},
+                {"2 ", ".......  ", "000  "},
+                {"3", ".......  ", "000   "},
+                {"4", ".......  ", "000   "},
+                {"5 ", ".......  ", "000   "},
+                {"6", ".......  ", "000  "},
+                {"7", ".......  ", "000  "},
+                {"8", ".......", "000  "},
+                {"9", ".......  ", "000  "},
+                {"10", ".......  ", "000   "}
             },
             new String [] {
                 "", "username", "score"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        HighScoreTable.setGridColor(new java.awt.Color(194, 217, 255));
+        HighScoreTable.setPreferredSize(new java.awt.Dimension(100, 300));
         HighScoreTable.setRowHeight(30);
         HighScoreTable.setSelectionBackground(new java.awt.Color(194, 217, 255));
         HighScoreTable.setSelectionForeground(new java.awt.Color(0, 0, 0));
@@ -81,17 +94,18 @@ public class scoreboard extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(230, Short.MAX_VALUE)
+                .addGap(186, 186, 186)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 423, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(191, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addGap(340, 340, 340))
+                        .addGap(346, 346, 346))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(backBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(352, 352, 352))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 423, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(147, 147, 147))))
+                        .addGap(353, 353, 353))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -99,10 +113,10 @@ public class scoreboard extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 337, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 331, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(backBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(77, Short.MAX_VALUE))
+                .addContainerGap(89, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -115,9 +129,7 @@ public class scoreboard extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
