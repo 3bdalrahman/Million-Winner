@@ -15,6 +15,10 @@ public class Home extends javax.swing.JFrame {
      */
     public Home() {
         initComponents();
+        User currentUser = UserSession.getInsance().getCurrentUser();
+        usernameLabel.setText(currentUser.getUsername());
+        String ScoreText = String.valueOf(currentUser.getScore());
+        ScoreValue.setText(ScoreText);
     }
 
     /**
@@ -39,6 +43,7 @@ public class Home extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(25, 4, 130));
         setMaximumSize(new java.awt.Dimension(800, 500));
+        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(194, 217, 255));
         jPanel1.setPreferredSize(new java.awt.Dimension(800, 500));
@@ -77,6 +82,11 @@ public class Home extends javax.swing.JFrame {
         showScoreboardBtn.setText("Scoreboard");
         showScoreboardBtn.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         showScoreboardBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        showScoreboardBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                showScoreboardBtnActionPerformed(evt);
+            }
+        });
 
         StartBtn.setBackground(new java.awt.Color(119, 82, 254));
         StartBtn.setFont(new java.awt.Font("Showcard Gothic", 0, 12)); // NOI18N
@@ -170,13 +180,14 @@ public class Home extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_ExitBtnActionPerformed
 
-    public void setUsername(String name){
-        usernameLabel.setText(name);
-    }
-    public void setScore(int score){
-        String ScoreText = String.valueOf(score);
-        ScoreValue.setText(ScoreText);
-    }
+    private void showScoreboardBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showScoreboardBtnActionPerformed
+        scoreboard scoreboardFrame = new scoreboard();
+        scoreboardFrame.setVisible(true);
+        scoreboardFrame.pack();
+        scoreboardFrame.setLocationRelativeTo(null);
+        this.dispose();
+    }//GEN-LAST:event_showScoreboardBtnActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

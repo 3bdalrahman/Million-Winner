@@ -48,6 +48,7 @@ public class Login extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(800, 500));
+        setResizable(false);
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setToolTipText("");
@@ -240,9 +241,11 @@ public class Login extends javax.swing.JFrame {
                     score= rs.getInt("score");
                 }
                 if(notFound == 1 && passDb.equals(password)){
+                    User loggedInUser = new User();
+                    loggedInUser.setUsername(username);
+                    loggedInUser.setScore(score);
+                    UserSession.getInsance().setCurrentUser(loggedInUser);
                     Home HomeFrame = new Home();
-                    HomeFrame.setUsername(username);
-                    HomeFrame.setScore(score);
                     HomeFrame.setVisible(true);
                     HomeFrame.pack();
                     HomeFrame.setLocationRelativeTo(null);
