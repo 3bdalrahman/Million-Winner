@@ -218,7 +218,7 @@ public class Login extends javax.swing.JFrame {
     private void LoginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginBtnActionPerformed
 
         String username,password,selectQuery,passDb = null;
-        int score=0,level=0;
+        int score=0,level=0,id=0;
         int notFound = 0;
         try{
             Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
@@ -232,7 +232,7 @@ public class Login extends javax.swing.JFrame {
             }else{
                 username = usernameField.getText();
                 password = passwordField.getText();
-                selectQuery = "SELECT username,password,score,level FROM user WHERE username = '"+username+"'";
+                selectQuery = "SELECT id,username,password,score,level FROM user WHERE username = '"+username+"'";
                 ResultSet rs = st.executeQuery(selectQuery);
                 
                 while(rs.next()){
@@ -240,11 +240,13 @@ public class Login extends javax.swing.JFrame {
                     notFound=1;
                     username = rs.getString("username");
                     score= rs.getInt("score");
+                    id=rs.getInt("id");
                 }
                 if(notFound == 1 && passDb.equals(password)){
                     User loggedInUser = new User();
                     loggedInUser.setUsername(username);
                     loggedInUser.setScore(score);
+                    loggedInUser.setId(id);
                     UserSession.getInsance().setCurrentUser(loggedInUser);
                     Home HomeFrame = new Home();
                     HomeFrame.setVisible(true);
