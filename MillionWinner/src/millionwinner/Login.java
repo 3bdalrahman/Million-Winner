@@ -32,6 +32,7 @@ public class Login extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jColorChooser1 = new javax.swing.JColorChooser();
         jPanel2 = new javax.swing.JPanel();
         LeftPanel = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
@@ -105,20 +106,21 @@ public class Login extends javax.swing.JFrame {
         jLabel1.setText("LOGIN");
 
         jLabel2.setFont(new java.awt.Font("Showcard Gothic", 0, 16)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Username");
 
         usernameField.setBackground(new java.awt.Color(194, 217, 255));
         usernameField.setFont(new java.awt.Font("Showcard Gothic", 0, 16)); // NOI18N
-        usernameField.setForeground(new java.awt.Color(0, 0, 0));
+        usernameField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                usernameFieldActionPerformed(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("Showcard Gothic", 0, 16)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("Password");
 
         passwordField.setBackground(new java.awt.Color(194, 217, 255));
         passwordField.setFont(new java.awt.Font("Showcard Gothic", 0, 16)); // NOI18N
-        passwordField.setForeground(new java.awt.Color(0, 0, 0));
 
         LoginBtn.setBackground(new java.awt.Color(119, 82, 254));
         LoginBtn.setFont(new java.awt.Font("Showcard Gothic", 0, 16)); // NOI18N
@@ -135,7 +137,6 @@ public class Login extends javax.swing.JFrame {
 
         jLabel3.setBackground(new java.awt.Color(255, 255, 255));
         jLabel3.setFont(new java.awt.Font("Showcard Gothic", 0, 12)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("I don't have an account");
 
         jButton2.setBackground(new java.awt.Color(194, 217, 255));
@@ -218,12 +219,12 @@ public class Login extends javax.swing.JFrame {
     private void LoginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginBtnActionPerformed
 
         String username,password,selectQuery,passDb = null;
-        int score=0,level=0;
+        int score=0,level=0,id=0;
         int notFound = 0;
         try{
             Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
 //            Connection con = DriverManager.getConnection(SUrl,SUser,SPass);
-            con = DriverManager.getConnection("jdbc:mysql://localhost/MillionWinner?user=root&password=Abdo1234");
+            con = DriverManager.getConnection("jdbc:mysql://localhost/MillionWinner?user=root&password=");
             Statement st = con.createStatement();
             if("".equals(usernameField.getText())){
                 JOptionPane.showMessageDialog(new JFrame(), "Username is required","Error",JOptionPane.ERROR_MESSAGE);
@@ -232,7 +233,7 @@ public class Login extends javax.swing.JFrame {
             }else{
                 username = usernameField.getText();
                 password = passwordField.getText();
-                selectQuery = "SELECT username,password,score,level FROM user WHERE username = '"+username+"'";
+                selectQuery = "SELECT id,username,password,score,level FROM user WHERE username = '"+username+"'";
                 ResultSet rs = st.executeQuery(selectQuery);
                 
                 while(rs.next()){
@@ -240,11 +241,13 @@ public class Login extends javax.swing.JFrame {
                     notFound=1;
                     username = rs.getString("username");
                     score= rs.getInt("score");
+                    id=rs.getInt("id");
                 }
                 if(notFound == 1 && passDb.equals(password)){
                     User loggedInUser = new User();
                     loggedInUser.setUsername(username);
                     loggedInUser.setScore(score);
+                    loggedInUser.setId(id);
                     UserSession.getInsance().setCurrentUser(loggedInUser);
                     Home HomeFrame = new Home();
                     HomeFrame.setVisible(true);
@@ -270,46 +273,21 @@ public class Login extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void usernameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usernameFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_usernameFieldActionPerformed
+
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Login().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel LeftPanel;
     private javax.swing.JButton LoginBtn;
     private javax.swing.JPanel RighPanel;
     private javax.swing.JButton jButton2;
+    private javax.swing.JColorChooser jColorChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
