@@ -1,11 +1,11 @@
 CREATE DATABASE MillionWinner;
 use MillionWinner;
 create table user(
-id bigint primary key,
-username varchar(255),
+id bigint primary key AUTOINCREMENT,
+username varchar(255) UNIQUE,
 password longtext,
 score int,
-levle int
+level int
 );
 
 create table question(
