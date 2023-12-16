@@ -224,7 +224,7 @@ public class Login extends javax.swing.JFrame {
         try{
             Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
 //            Connection con = DriverManager.getConnection(SUrl,SUser,SPass);
-            con = DriverManager.getConnection("jdbc:mysql://localhost/MillionWinner?user=root&password=");
+            con = DriverManager.getConnection("jdbc:mysql://localhost/MillionWinner?user=root&password=Abdo1234");
             Statement st = con.createStatement();
             if("".equals(usernameField.getText())){
                 JOptionPane.showMessageDialog(new JFrame(), "Username is required","Error",JOptionPane.ERROR_MESSAGE);

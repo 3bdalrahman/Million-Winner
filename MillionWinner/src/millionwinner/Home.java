@@ -95,6 +95,11 @@ public class Home extends javax.swing.JFrame {
         StartBtn.setText("Start");
         StartBtn.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         StartBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        StartBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                StartBtnActionPerformed(evt);
+            }
+        });
 
         ExitBtn.setBackground(new java.awt.Color(119, 82, 254));
         ExitBtn.setFont(new java.awt.Font("Showcard Gothic", 0, 12)); // NOI18N
@@ -196,6 +201,14 @@ public class Home extends javax.swing.JFrame {
         ScoreValue.setText(ScoreText);
     }//GEN-LAST:event_formWindowActivated
 
+    private void StartBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StartBtnActionPerformed
+        // TODO add your handling code here:
+        category categoryFrame = new category();
+        categoryFrame.setVisible(true);
+        categoryFrame.pack();
+        categoryFrame.setLocationRelativeTo(null);
+        this.dispose();
+    }//GEN-LAST:event_StartBtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
