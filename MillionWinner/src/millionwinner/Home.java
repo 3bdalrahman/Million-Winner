@@ -4,6 +4,8 @@
  */
 package millionwinner;
 
+import static millionwinner.category.categoryFrame;
+
 /**
  *
  * @author user
@@ -38,7 +40,6 @@ public class Home extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(25, 4, 130));
-        setMaximumSize(new java.awt.Dimension(800, 500));
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowActivated(java.awt.event.WindowEvent evt) {
@@ -51,7 +52,6 @@ public class Home extends javax.swing.JFrame {
 
         LogoutBtn.setBackground(new java.awt.Color(119, 82, 254));
         LogoutBtn.setFont(new java.awt.Font("Showcard Gothic", 0, 12)); // NOI18N
-        LogoutBtn.setForeground(new java.awt.Color(0, 0, 0));
         LogoutBtn.setText("LogOut");
         LogoutBtn.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         LogoutBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -62,24 +62,19 @@ public class Home extends javax.swing.JFrame {
         });
 
         WelcomeText.setFont(new java.awt.Font("Showcard Gothic", 1, 36)); // NOI18N
-        WelcomeText.setForeground(new java.awt.Color(0, 0, 0));
         WelcomeText.setText("Welcome!");
 
         usernameLabel.setFont(new java.awt.Font("Showcard Gothic", 1, 36)); // NOI18N
-        usernameLabel.setForeground(new java.awt.Color(0, 0, 0));
         usernameLabel.setText("User");
 
         ScoreValue.setFont(new java.awt.Font("Showcard Gothic", 0, 12)); // NOI18N
-        ScoreValue.setForeground(new java.awt.Color(0, 0, 0));
         ScoreValue.setText("0");
 
         ScoreText.setFont(new java.awt.Font("Showcard Gothic", 0, 12)); // NOI18N
-        ScoreText.setForeground(new java.awt.Color(0, 0, 0));
         ScoreText.setText("Scroe:");
 
         showScoreboardBtn.setBackground(new java.awt.Color(119, 82, 254));
         showScoreboardBtn.setFont(new java.awt.Font("Showcard Gothic", 0, 12)); // NOI18N
-        showScoreboardBtn.setForeground(new java.awt.Color(0, 0, 0));
         showScoreboardBtn.setText("Scoreboard");
         showScoreboardBtn.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         showScoreboardBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -91,14 +86,17 @@ public class Home extends javax.swing.JFrame {
 
         StartBtn.setBackground(new java.awt.Color(119, 82, 254));
         StartBtn.setFont(new java.awt.Font("Showcard Gothic", 0, 12)); // NOI18N
-        StartBtn.setForeground(new java.awt.Color(0, 0, 0));
         StartBtn.setText("Start");
         StartBtn.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         StartBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        StartBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                StartBtnActionPerformed(evt);
+            }
+        });
 
         ExitBtn.setBackground(new java.awt.Color(119, 82, 254));
         ExitBtn.setFont(new java.awt.Font("Showcard Gothic", 0, 12)); // NOI18N
-        ExitBtn.setForeground(new java.awt.Color(0, 0, 0));
         ExitBtn.setText("Exit");
         ExitBtn.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         ExitBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -195,6 +193,17 @@ public class Home extends javax.swing.JFrame {
         String ScoreText = String.valueOf(currentUser.getScore());
         ScoreValue.setText(ScoreText);
     }//GEN-LAST:event_formWindowActivated
+
+    private void StartBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StartBtnActionPerformed
+        // TODO add your handling code here:
+         category.categoryFrame = new category();
+         categoryFrame.setVisible(true);
+        categoryFrame.pack();
+        categoryFrame.setLocationRelativeTo(null);
+        this.dispose();
+         
+         
+    }//GEN-LAST:event_StartBtnActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

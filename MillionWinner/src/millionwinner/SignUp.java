@@ -95,12 +95,10 @@ public class SignUp extends javax.swing.JFrame {
         jLabel2.setText("SignUp");
 
         jLabel3.setFont(new java.awt.Font("Showcard Gothic", 0, 16)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Username");
 
         usernameField.setBackground(new java.awt.Color(194, 217, 255));
         usernameField.setFont(new java.awt.Font("Showcard Gothic", 0, 16)); // NOI18N
-        usernameField.setForeground(new java.awt.Color(0, 0, 0));
         usernameField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 usernameFieldActionPerformed(evt);
@@ -108,12 +106,10 @@ public class SignUp extends javax.swing.JFrame {
         });
 
         jLabel4.setFont(new java.awt.Font("Showcard Gothic", 0, 16)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("Password");
 
         passwordField.setBackground(new java.awt.Color(194, 217, 255));
         passwordField.setFont(new java.awt.Font("Showcard Gothic", 0, 16)); // NOI18N
-        passwordField.setForeground(new java.awt.Color(0, 0, 0));
 
         SignUpBtn.setBackground(new java.awt.Color(119, 82, 254));
         SignUpBtn.setFont(new java.awt.Font("Showcard Gothic", 0, 16)); // NOI18N
@@ -129,7 +125,6 @@ public class SignUp extends javax.swing.JFrame {
 
         jLabel5.setBackground(new java.awt.Color(255, 255, 255));
         jLabel5.setFont(new java.awt.Font("Showcard Gothic", 0, 12)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setText("You already have an account");
 
         LoginPageBtn.setBackground(new java.awt.Color(194, 217, 255));
@@ -221,7 +216,7 @@ public class SignUp extends javax.swing.JFrame {
         try{
             Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
 //            Connection con = DriverManager.getConnection(SUrl,SUser,SPass);
-            con = DriverManager.getConnection("jdbc:mysql://localhost/MillionWinner?user=root&password=Abdo1234");
+            con = DriverManager.getConnection("jdbc:mysql://localhost/MillionWinner?user=root&password=");
             Statement st = con.createStatement();
             if("".equals(usernameField.getText())){
                 JOptionPane.showMessageDialog(new JFrame(), "Username is required","Error",JOptionPane.ERROR_MESSAGE);
