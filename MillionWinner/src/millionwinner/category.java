@@ -4,7 +4,6 @@
  */
 package millionwinner;
 
-import java.sql.Connection;
 
 public class category extends javax.swing.JFrame {
 
@@ -13,7 +12,6 @@ public class category extends javax.swing.JFrame {
     /**
      * Creates new form category
      */
-    Connection con = null;
     public category() {
         initComponents();
     }
@@ -123,14 +121,29 @@ public class category extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+            quiz quizFrame = new quiz();
+            quizFrame.setVisible(true);
+            quizFrame.pack();
+            quizFrame.setLocationRelativeTo(null);
+            this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+            java_quiz java_quizFrame = new java_quiz();
+            java_quizFrame.setVisible(true);
+            java_quizFrame.pack();
+            java_quizFrame.setLocationRelativeTo(null);
+            this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
+            python_quiz python_quizFrame = new python_quiz();
+            python_quizFrame.setVisible(true);
+            python_quizFrame.pack();
+            python_quizFrame.setLocationRelativeTo(null);
+            this.dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
