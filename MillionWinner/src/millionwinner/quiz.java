@@ -60,6 +60,20 @@ public class quiz extends javax.swing.JFrame {
         HomeFrame.pack();
         HomeFrame.setLocationRelativeTo(null);
         this.dispose();
+        User currentUser = UserSession.getInsance().getCurrentUser();
+        currentUser.setScore(sumscore);
+        int id=currentUser.getId();
+                           try{
+            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+//            Connection con = DriverManager.getConnection(SUrl,SUser,SPass);
+            con = DriverManager.getConnection("jdbc:mysql://localhost/MillionWinner?user=root&password=123456789");
+            Statement st = con.createStatement();
+            String update = "update user set score='"+sumscore+"' where id='"+id+"'";
+            st.execute(update);
+            }
+        catch(Exception e){
+            System.out.println("Error!"+e.getMessage());
+        }
         }
         }else if(!studentanswer.equals(null) && !studentanswer.equals(answer)){
         JOptionPane.showMessageDialog(new JFrame(), "Your score: "+sumscore,"Good Luck!",JOptionPane.ERROR_MESSAGE);
@@ -68,6 +82,20 @@ public class quiz extends javax.swing.JFrame {
         HomeFrame.pack();
         HomeFrame.setLocationRelativeTo(null);
         this.dispose();
+        User currentUser = UserSession.getInsance().getCurrentUser();
+        currentUser.setScore(sumscore);
+        int id=currentUser.getId();
+                           try{
+            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+//            Connection con = DriverManager.getConnection(SUrl,SUser,SPass);
+            con = DriverManager.getConnection("jdbc:mysql://localhost/MillionWinner?user=root&password=123456789");
+            Statement st = con.createStatement();
+            String update = "update user set score='"+sumscore+"' where id='"+id+"'";
+            st.execute(update);
+            }
+        catch(Exception e){
+            System.out.println("Error!"+e.getMessage());
+        }
         }
         
            
