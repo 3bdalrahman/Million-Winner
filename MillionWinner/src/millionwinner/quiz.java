@@ -20,11 +20,12 @@ import javax.swing.JRadioButton;
  */
 public class quiz extends javax.swing.JFrame {
      Connection con = null;
-  
+     private String category;
+     
    
-    String answer,studentanswer;
-    int correct,sumscore=0;
-    int questionid=1;
+    private String answer,studentanswer;
+    private int correct,sumscore=0,finalScore;
+    private int questionid;
     
     public void checkanswer()
     {
@@ -52,7 +53,7 @@ public class quiz extends javax.swing.JFrame {
         {
             sumscore+=correct;
             
-            if(questionid == 4)
+            if(questionid == questionid+3)
         {
             JOptionPane.showMessageDialog(new JFrame(), "Your are winner!!","Achived All",JOptionPane.ERROR_MESSAGE);
          Home HomeFrame = new Home();
@@ -61,14 +62,15 @@ public class quiz extends javax.swing.JFrame {
         HomeFrame.setLocationRelativeTo(null);
         this.dispose();
         User currentUser = UserSession.getInsance().getCurrentUser();
-        currentUser.setScore(sumscore);
+        finalScore = currentUser.getScore()+sumscore;
+        currentUser.setScore(finalScore);
         int id=currentUser.getId();
                            try{
             Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
 //            Connection con = DriverManager.getConnection(SUrl,SUser,SPass);
-            con = DriverManager.getConnection("jdbc:mysql://localhost/MillionWinner?user=root&password=123456789");
+            con = DriverManager.getConnection("jdbc:mysql://localhost/MillionWinner?user=root&password=Abdo1234");
             Statement st = con.createStatement();
-            String update = "update user set score='"+sumscore+"' where id='"+id+"'";
+            String update = "update user set score="+finalScore+" where id="+id+"";
             st.execute(update);
             }
         catch(Exception e){
@@ -83,14 +85,15 @@ public class quiz extends javax.swing.JFrame {
         HomeFrame.setLocationRelativeTo(null);
         this.dispose();
         User currentUser = UserSession.getInsance().getCurrentUser();
-        currentUser.setScore(sumscore);
+        finalScore = currentUser.getScore()+sumscore;
+        currentUser.setScore(finalScore);
         int id=currentUser.getId();
                            try{
             Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
 //            Connection con = DriverManager.getConnection(SUrl,SUser,SPass);
-            con = DriverManager.getConnection("jdbc:mysql://localhost/MillionWinner?user=root&password=123456789");
+            con = DriverManager.getConnection("jdbc:mysql://localhost/MillionWinner?user=root&password=Abdo1234");
             Statement st = con.createStatement();
-            String update = "update user set score='"+sumscore+"' where id='"+id+"'";
+            String update = "update user set score="+finalScore+" where id="+id+"";
             st.execute(update);
             }
         catch(Exception e){
@@ -116,7 +119,7 @@ public class quiz extends javax.swing.JFrame {
                         try{
             Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
 //            Connection con = DriverManager.getConnection(SUrl,SUser,SPass);
-            con = DriverManager.getConnection("jdbc:mysql://localhost/MillionWinner?user=root&password=123456789");
+            con = DriverManager.getConnection("jdbc:mysql://localhost/MillionWinner?user=root&password=Abdo1234");
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery("SELECT * FROM question where id='"+questionid+"'");
                 while(rs.next()){
@@ -137,12 +140,20 @@ public class quiz extends javax.swing.JFrame {
     
   
    
-         public quiz() {
-        initComponents();
-        if(questionid==1)
-        {
-            question();
+    public quiz(String category) {
+        this.category=category;
+        if(category=="math"){
+            this.questionid=1;
+        }else if(category == "java"){
+            this.questionid=5;
+        }else if(category == "python"){
+            this.questionid=9;
         }
+        initComponents();
+//        if(questionid==1)
+//        {
+            question();
+//        }
     }
     
    
@@ -325,37 +336,7 @@ public class quiz extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(quiz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(quiz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(quiz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(quiz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new quiz().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
