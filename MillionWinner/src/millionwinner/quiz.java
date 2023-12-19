@@ -25,7 +25,7 @@ public class quiz extends javax.swing.JFrame {
    
     private String answer,studentanswer;
     private int correct,sumscore=0,finalScore;
-    private int questionid;
+    private int questionid,questioncheck;
     
     public void checkanswer()
     {
@@ -53,7 +53,7 @@ public class quiz extends javax.swing.JFrame {
         {
             sumscore+=correct;
             
-            if(questionid == questionid+3)
+            if(questionid == questioncheck+3)
         {
             JOptionPane.showMessageDialog(new JFrame(), "Your are winner!!","Achived All",JOptionPane.ERROR_MESSAGE);
          Home HomeFrame = new Home();
@@ -68,7 +68,7 @@ public class quiz extends javax.swing.JFrame {
                            try{
             Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
 //            Connection con = DriverManager.getConnection(SUrl,SUser,SPass);
-            con = DriverManager.getConnection("jdbc:mysql://localhost/MillionWinner?user=root&password=Abdo1234");
+            con = DriverManager.getConnection("jdbc:mysql://localhost/MillionWinner?user=root&password=123456789");
             Statement st = con.createStatement();
             String update = "update user set score="+finalScore+" where id="+id+"";
             st.execute(update);
@@ -91,7 +91,7 @@ public class quiz extends javax.swing.JFrame {
                            try{
             Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
 //            Connection con = DriverManager.getConnection(SUrl,SUser,SPass);
-            con = DriverManager.getConnection("jdbc:mysql://localhost/MillionWinner?user=root&password=Abdo1234");
+            con = DriverManager.getConnection("jdbc:mysql://localhost/MillionWinner?user=root&password=123456789");
             Statement st = con.createStatement();
             String update = "update user set score="+finalScore+" where id="+id+"";
             st.execute(update);
@@ -106,7 +106,8 @@ public class quiz extends javax.swing.JFrame {
         
     // question changes
     questionid++;
-    
+    System.out.println(questionid);
+    System.out.println(questioncheck);
     //clear radiobutton
     jRadioButton1.setSelected(false);
     jRadioButton2.setSelected(false);
@@ -119,7 +120,7 @@ public class quiz extends javax.swing.JFrame {
                         try{
             Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
 //            Connection con = DriverManager.getConnection(SUrl,SUser,SPass);
-            con = DriverManager.getConnection("jdbc:mysql://localhost/MillionWinner?user=root&password=Abdo1234");
+            con = DriverManager.getConnection("jdbc:mysql://localhost/MillionWinner?user=root&password=123456789");
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery("SELECT * FROM question where id='"+questionid+"'");
                 while(rs.next()){
@@ -144,11 +145,15 @@ public class quiz extends javax.swing.JFrame {
         this.category=category;
         if(category=="math"){
             this.questionid=1;
+            this.questioncheck=questionid;
         }else if(category == "java"){
             this.questionid=5;
+            this.questioncheck=questionid;
         }else if(category == "python"){
             this.questionid=9;
+            this.questioncheck=questionid;
         }
+        
         initComponents();
 //        if(questionid==1)
 //        {
@@ -180,13 +185,11 @@ public class quiz extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(194, 217, 255));
 
         jLabel2.setFont(new java.awt.Font("Showcard Gothic", 1, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("jLabel2");
 
         jRadioButton1.setBackground(new java.awt.Color(194, 217, 255));
         jRadioButton1.setFont(new java.awt.Font("Showcard Gothic", 0, 12)); // NOI18N
-        jRadioButton1.setForeground(new java.awt.Color(0, 0, 0));
         jRadioButton1.setText("jRadioButton1");
         jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -196,7 +199,6 @@ public class quiz extends javax.swing.JFrame {
 
         jRadioButton2.setBackground(new java.awt.Color(194, 217, 255));
         jRadioButton2.setFont(new java.awt.Font("Showcard Gothic", 0, 12)); // NOI18N
-        jRadioButton2.setForeground(new java.awt.Color(0, 0, 0));
         jRadioButton2.setText("jRadioButton2");
         jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -206,7 +208,6 @@ public class quiz extends javax.swing.JFrame {
 
         jRadioButton3.setBackground(new java.awt.Color(194, 217, 255));
         jRadioButton3.setFont(new java.awt.Font("Showcard Gothic", 0, 12)); // NOI18N
-        jRadioButton3.setForeground(new java.awt.Color(0, 0, 0));
         jRadioButton3.setText("jRadioButton3");
         jRadioButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -216,7 +217,6 @@ public class quiz extends javax.swing.JFrame {
 
         jRadioButton4.setBackground(new java.awt.Color(194, 217, 255));
         jRadioButton4.setFont(new java.awt.Font("Showcard Gothic", 0, 12)); // NOI18N
-        jRadioButton4.setForeground(new java.awt.Color(0, 0, 0));
         jRadioButton4.setText("jRadioButton4");
         jRadioButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -226,7 +226,6 @@ public class quiz extends javax.swing.JFrame {
 
         jButton1.setBackground(new java.awt.Color(119, 82, 254));
         jButton1.setFont(new java.awt.Font("Showcard Gothic", 0, 16)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(0, 0, 0));
         jButton1.setText("Next");
         jButton1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -333,7 +332,7 @@ public class quiz extends javax.swing.JFrame {
         // TODO add your handling code here:
         checkanswer();
         question();
-        if(questionid == 4)
+        if(questionid == questioncheck+3)
         {
             jButton1.setText("Finish");
         }
